@@ -5,13 +5,13 @@ phases:
     #If you use the Ubuntu standard image 2.0 or later, you must specify runtime-versions.
     #If you specify runtime-versions and use an image other than Ubuntu standard image 2.0, the build fails.
       runtime-versions:
-        java: openjdk8
+        java: corretto8
         python: 3.8
       commands:
-        - wget https://nodejs.org/dist/v12.22.3/node-v12.22.3-linux-x64.tar.gz && mkdir $CODEBUILD_SRC_DIR/node && tar -xzf node-v10.15.3-linux-x64.tar.gz -C $CODEBUILD_SRC_DIR/node
+        - wget https://nodejs.org/dist/v12.13.0/node-v12.13.0-linux-x64.tar.gz && mkdir $CODEBUILD_SRC_DIR/node && tar -xzf node-v12.13.0-linux-x64.tar.gz -C $CODEBUILD_SRC_DIR/node
         - rm -f /usr/local/bin/node && rm -f /usr/local/bin/npm
-        - ln -s $CODEBUILD_SRC_DIR/node/node-v12.22.3-linux-x64/bin/node /usr/local/bin/node
-        - ln -s $CODEBUILD_SRC_DIR/node/node-v12.22.3-linux-x64/bin/npm  /usr/local/bin/npm
+        - ln -s $CODEBUILD_SRC_DIR/node/node-v12.13.0-linux-x64/bin/node /usr/local/bin/node
+        - ln -s $CODEBUILD_SRC_DIR/node/node-v12.13.0-linux-x64/bin/npm  /usr/local/bin/npm
         - chown -R root:root $CODEBUILD_SRC_DIR/node
   pre_build:
       commands:
@@ -30,6 +30,8 @@ phases:
       - mvn clean install -P$BUILD_PROFILE_NAME -Dcdn-url=$mvn_cdn_url
       - mkdir static_content
       - unzip target/ui-artifact.zip -d static_content/
+      - echo $S3_BUCKET
+      - echo $CODEBUILD_BUILD_NUMBER
       - aws s3 sync static_content/ $S3_BUCKET/$CODEBUILD_BUILD_NUMBER
       - docker build --tag $REPOSITORY_URI:$TAG .
 
