@@ -299,12 +299,6 @@
                 <profile.props.file>prod.properties</profile.props.file>
             </properties>
         </profile>
-        <profile>
-            <id>prod</id>
-            <properties>
-                <profile.props.file>prod.properties</profile.props.file>
-            </properties>
-        </profile>
     </profiles>
     <repositories>
         <repository>
