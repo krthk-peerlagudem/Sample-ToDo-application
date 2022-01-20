@@ -56,14 +56,14 @@
                                         <versionRange>[1.7,)</versionRange>
                                         <goals>
                                             <goal>run</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
+                    </goals>
+                  </pluginExecutionFilter>
                                     <action>
                                         <ignore/>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
                     </configuration>
                 </plugin>
                 <plugin>
@@ -92,18 +92,16 @@
                         <configuration>
                             <files>
                                 <file>profiles/${profile.props.file}</file>
-                            </files>
+              </files>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.2.0</version>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
                 <executions>
@@ -116,11 +114,11 @@
                     <filesets>
                         <fileset>
                             <directory>${basedir}/src/main/webapp/WEB-INF/lib</directory>
-                        </fileset>
+            </fileset>
                         <fileset>
                             <directory>${basedir}/src/main/webapp/WEB-INF/classes</directory>
-                        </fileset>
-                    </filesets>
+            </fileset>
+          </filesets>
                 </configuration>
             </plugin>
             <plugin>
@@ -137,13 +135,12 @@
                         <configuration>
                             <sources>
                                 <source>services/securityService/src</source>
-                            </sources>
+              </sources>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>3.0.0</version>
                 <executions>
@@ -156,7 +153,7 @@
                         <configuration>
                             <target>
                                 <ant antfile="${basedir}/build.xml" target="init"/>
-                            </target>
+              </target>
                         </configuration>
                     </execution>
                     <execution>
@@ -168,7 +165,7 @@
                         <configuration>
                             <target>
                                 <ant antfile="${basedir}/build.xml" target="generate-resources"/>
-                            </target>
+              </target>
                         </configuration>
                     </execution>
                     <execution>
@@ -180,13 +177,12 @@
                         <configuration>
                             <target>
                                 <ant antfile="${basedir}/build.xml" target="uiBuild"/>
-                            </target>
+              </target>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
@@ -253,7 +249,6 @@
                 </executions>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.3.1</version>
                 <configuration>
@@ -261,8 +256,8 @@
                     <webResources>
                         <resource>
                             <directory>target/ui-build/output-files</directory>
-                        </resource>
-                    </webResources>
+            </resource>
+          </webResources>
                 </configuration>
             </plugin>
         </plugins>
@@ -298,6 +293,18 @@
                 </dependency>
             </dependencies>
         </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profile.props.file>prod.properties</profile.props.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <profile.props.file>prod.properties</profile.props.file>
+            </properties>
+        </profile>
     </profiles>
     <repositories>
         <repository>
@@ -307,7 +314,6 @@
             <id>central</id>
             <name>Maven Repository Switchboard</name>
             <url>https://repo1.maven.org/maven2</url>
-            <layout>default</layout>
         </repository>
         <repository>
             <releases>
@@ -356,12 +362,12 @@
         </dependencies>
     </dependencyManagement>
     <properties>
+        <wavemaker.artifactType>wmapp</wavemaker.artifactType>
+        <profile.props.file>development.properties</profile.props.file>
+        <wavemaker.app.runtime.services.version>10.11.0</wavemaker.app.runtime.services.version>
+        <wavemaker.studio.version>10.11.0</wavemaker.studio.version>
+        <wavemaker.app.runtime.ui.version>10.11.0-rc.60</wavemaker.app.runtime.ui.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.lib.directory>${basedir}/lib</project.lib.directory>
-        <profile.props.file>development.properties</profile.props.file>
-        <wavemaker.studio.version>10.11.0</wavemaker.studio.version>
-        <wavemaker.app.runtime.services.version>10.11.0</wavemaker.app.runtime.services.version>
-        <wavemaker.app.runtime.ui.version>10.11.0-rc.60</wavemaker.app.runtime.ui.version>
-        <wavemaker.artifactType>wmapp</wavemaker.artifactType>
     </properties>
 </project>
